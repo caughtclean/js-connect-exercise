@@ -1,4 +1,3 @@
-const settings = require("./settings");
 const knex = require('knex')({
   client: 'pg',
   connection: {
@@ -16,9 +15,8 @@ const knex = require('knex')({
 var args = process.argv
 
 
-knex('famous_people').insert({first_name: 'args[2]'}, {last_name: 'args[3]'}, {birthdate: 'args[4]'}).
-asCallback(function(err, rows) {
+knex('famous_people').insert([{first_name: args[2], last_name: args[3], birthdate: args[4]}]).asCallback(function(err, rows) {
   if (err) return console.error(err);
-  console.log("rows")
+  console.log(rows)
 
 });
